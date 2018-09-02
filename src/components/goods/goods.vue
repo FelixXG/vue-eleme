@@ -40,6 +40,7 @@
       </div>
       <shopcart
         :delivery-price="seller.deliveryPrice"
+        :select-foods="selectFoods"
         :min-price="seller.minPrice"
       ></shopcart>
     </div>
@@ -50,6 +51,7 @@
   import BScroll from 'better-scroll';
   import shopcart from '../shopcart/shopcart';
   import cartcontrol from '../cartcontrol/cartcontrol';
+
   const response = require('../../common/data/goods');
     const ERR_OK = 0;
     export default {
@@ -81,6 +83,17 @@
             }
           }
           return 0;
+        },
+        selectFoods() {
+          let foods = [];
+          this.goods.forEach((good) => {
+            good.foods.forEach((food) => {
+              if (food.count) {
+                foods.push(food);
+              }
+            });
+          });
+          return foods;
         }
       },
       created() {
