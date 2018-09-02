@@ -13,7 +13,10 @@
           type: Object,
           default: () => {}
           }
-        }
+        },
+      created() {
+        console.log(JSON.stringify(this.food));
+      }
     };
 </script>
 
