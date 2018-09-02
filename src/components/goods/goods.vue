@@ -46,7 +46,7 @@
 <script type="text/ecmascript-6">
   import BScroll from 'better-scroll';
   import shopcart from '../shopcart/shopcart';
-  import cartControl from '../cartcontrol/cartcontrol'
+  import cartControl from '../cartcontrol/cartcontrol';
 
   const response = require('../../common/data/goods');
     const ERR_OK = 0;
