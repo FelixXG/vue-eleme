@@ -16,7 +16,7 @@
           <li v-for="(item, index) in goods" class="food-list" :key="index" ref="foodList">
             <h1 class="title">{{item.name}}</h1>
             <ul>
-              <li  v-for="(food,k) in item.foods" :key="k" class="food-item border-1px">
+              <li @click="selectFood(food,$event)" v-for="(food,k) in item.foods" :key="k" class="food-item border-1px">
                 <div class="icon">
                   <img width="57" height="57" :src="food.icon">
                 </div>
@@ -45,6 +45,7 @@
         :min-price="seller.minPrice"
       ></shopcart>
     </div>
+    <food @add="addFood" :food="selectedFood" ref="food"></food>
   </div>
 </template>
 
@@ -52,6 +53,7 @@
   import BScroll from 'better-scroll';
   import shopcart from '../shopcart/shopcart';
   import cartcontrol from '../cartcontrol/cartcontrol';
+  import food from '../food/food'
 
   const response = require('../../common/data/goods');
     const ERR_OK = 0;
@@ -66,12 +68,13 @@
           goods: [],
           listHeight: [],
           scrollY: 0,
-          selectedFood: []
+          selectedFood: {}
         };
       },
       components: {
         cartcontrol,
-        shopcart
+        shopcart,
+        food
       },
       computed: {
         currentIndex() {
@@ -126,6 +129,13 @@
           let foodList = this.$refs.foodList;
           let el = foodList[index];
           this.foodsScroll.scrollToElement(el, 300);
+        },
+        selectFood(food, event){
+          if(!event._constructed) {
+            return;
+          }
+          this.selectedFood = food;
+          this.$refs.food.show();
         },
         _initScroll() {
           this.menuScroll = new BScroll(this.$refs.menuWrapper, {
