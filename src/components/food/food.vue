@@ -185,5 +185,5 @@
         line-height: 24px
         padding: 0 8px
         font-size: 12px
-        color: rgb(77,85,93)
+        color: rgb
 </style>
