@@ -34,12 +34,12 @@
           <ratingselect @select="selectRating" @toggle="toggleContent" :select-type="selectType" :only-content="onlyContent" :desc="desc" :ratings="food.ratings"></ratingselect>
           <div class="rating-wrapper">
             <ul v-show="food.ratings && food.ratings.length">
-              <li class="rating-item border-1px" v-for="rating in food.ratings">
+              <li v-show="needShow(rating.rateType,rating.text)" class="rating-item border-1px" v-for="rating in food.ratings">
                 <div class="user">
                   <span class="name">{{rating.username}}</span>
                   <img class="avatar" width="12" height="12" :src="rating.avatar">
                 </div>
-                <div class="time">{{rating.rateTime}}</div>
+                <div class="time">{{rating.rateTime | formatDate}}</div>
                 <p class="text">
                   <span :class="{'icon-thumb_up':rating.rateType===0,'icon-thumb_down':rating.rateType===1}">{{rating.text}}</span>
                 </p>
@@ -56,6 +56,7 @@
 <script type="text/ecmascript-6">
   import BScroll from 'better-scroll';
   import Vue from 'vue';
+  import {formatDate} from "../../common/js/date";
   import cartcontrol from '../cartcontrol/cartcontrol.vue';
   import ratingselect from '../ratingselect/ratingselect.vue'
   import split from '../split/split.vue';
@@ -105,6 +106,16 @@
           this.$emit('add', event.target);
           Vue.set(this.food, 'count', 1);
         },
+        needShow(type, text) {
+          if(this.onlyContent && !text){
+            return false;
+          }
+          if(this.selectType === ALL){
+            return true;
+          } else {
+            return type === this.selectType;
+          }
+        },
         addFood(target) {
           this.$emit('add', target);
         },
@@ -119,6 +130,12 @@
           this.$nextTick(() => {
             this.scroll.refresh();
           });
+        }
+      },
+      filters: {
+        formatDate(time) {
+          let date = new Date(time);
+          return formatDate(date,'yyyy-MM-dd hh:mm')
         }
       },
       components: {
