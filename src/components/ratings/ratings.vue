@@ -55,7 +55,7 @@
 </template>
 
 <script>
-    import BSCroll from 'better-scroll';
+    import BScroll from 'better-scroll';
     import {formatDate} from '../../common/js/date';
     import star from '../star/star.vue';
     import ratingselect from '../ratingselect/ratingselect.vue';
@@ -82,11 +82,10 @@
           this.ratings = response.data;
           console.log('测试rating数据啊啊啊啊',JSON.stringify(this.ratings));
           this.$nextTick(() => {
-            this.scroller = new BScroll(this.$refs.ratings, {
+            this.scroll = new BScroll(this.$refs.ratings, {
               click: true
-            })
-          })
-
+            });
+          });
         }
       },
       methods: {
@@ -138,7 +137,7 @@
     overflow: hidden
     .overview
       display: flex
-      padding: 48px 0
+      padding: 18px 0
       .overview-left
         flex: 0 0 137px
         padding: 6px 0
@@ -196,9 +195,67 @@
             margin-left: 12px
             font-size: 12px
             color: rgb(147,153,159)
-      .rating-wrapper
-        padding: 0 18px
+    .rating-wrapper
+      padding: 0 18px
+      .rating-item
+        display: flex
+        padding: 18px 0
+        border-1px(rgba(7,17,27,0.1))
+        .avatar
+          flex: 0 0 28px
+          width: 28px
+          margin-right: 12px
+          img
+            border-radius: 50%
+        .content
+          position: relative
+          flex: 1
+        .name
+          margin-bottom: 4px
+          line-height: 12px
+          font-size: 10px
+          color: rgb(7,17,27)
+        .star-wrapper
+          margin-bottom: 6px
+          font-size: 0
+          .star
+            display: inline-block
+            margin-right: 6px
+            vertical-align: top
+          .delivery
+            display: inline-block
+            vertical-align: top
+            line-height: 12px
+            font-size: 10px
+            color: rgb(147, 153, 159)
+        .text
+          margin-bottom: 8px
+          line-height: 18px
+          color: rgb(7,17,27)
+          font-size: 12px
+        .recommend
+          line-height: 16px
+          font-size: 0
+          .icon-thumb_up, .item
+            display: inline-block
+            margin: 0 8px 4px 0
+            font-size: 9px
+          .icon-thumb_up
+            color:rgb(0,160,220)
+          .item
+            padding: 0 6px
+            border: 1px solid rgba(7,17,27,0.1)
+            border-radius: 1px
+            color: rgb(147, 153, 159)
+            background: #ffffff
 
 
+        .time
+          position: absolute
+          top: 0
+          right: 0
+          line-height: 12px
+          font-size: 10px
+          color: rgb(147,153,159)
 
 </style>
