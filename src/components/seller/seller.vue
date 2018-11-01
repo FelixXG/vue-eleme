@@ -2,7 +2,7 @@
  * @Author: xiagf 
  * @Date: 2018-10-29 19:38:55 
  * @Last Modified by: xiagf
- * @Last Modified time: 2018-10-31 20:05:43
+ * @Last Modified time: 2018-11-01 20:35:12
  */
 <template>
     <div class="seller" ref="seller">
@@ -35,7 +35,7 @@
                     </li>
                 </ul>
                 <div class="favorite" @click="toggleFavorite">
-                    <span class="icon-favorite"></span>
+                    <span class="icon-favorite" :class="{active:favorite}"></span>
                     <span class="text">{{favoriteText}}</span>
 
                 </div>
@@ -64,12 +64,20 @@
                     </ul>
                 </div>
             </div>
+            <split></split>
+            <div class="info">
+                <h1 class="title border-1px">商家信息</h1>
+                <ul>
+                    <li class="info-item" v-for="(info,index) in seller.infos" :key="index">{{info}}</li>
+                </ul>
+            </div>
         </div>
     </div>
 </template>
 
 <script type="text/esmascript-6">
 import BScroll from "better-scroll";
+import { saveToLocal, loadFromLocal } from "../../common/js/store.js";
 import star from "../star/star";
 import split from "../split/split";
 export default {
@@ -80,9 +88,9 @@ export default {
     },
     data() {
         return {
-            // favorite: () => {
-            //     return loadFromLocal(this.seller.id, "favorite", false);
-            // }
+            favorite: () => {
+                return loadFromLocal(this.seller.id, "favorite", false);
+            }
         };
     },
     components: {
@@ -105,7 +113,6 @@ export default {
     },
     watch: {
         seller() {
-            console.log("测试watch的seller方法----->");
             this.$nextTick(() => {
                 this._initScroll();
                 this._initPics();
@@ -146,6 +153,7 @@ export default {
                 return;
             }
             this.favorite = !this.favorite;
+            saveToLocal(this.seller.id, "favorite", this.favorite);
         }
     },
     mounted() {
@@ -289,4 +297,19 @@ export default {
                     height: 90px
                     &:last-child
                         margin: 0
+    .info
+        padding: 18px 18px 0 18px
+        color: rgb(7, 17, 27)
+        .title
+            padding-bottom: 12px
+            line-height: 14px
+            border-1px(rgba(7, 17, 27, 0.1))
+            font-size: 14px
+        .info-item
+            padding: 16px 12px
+            line-height: 16px
+            border-1px(rgba(7, 17, 27, 0.1))
+            font-size: 12px
+            &:last-child
+                border-none()
 </style>
