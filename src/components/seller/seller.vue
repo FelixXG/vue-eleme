@@ -2,7 +2,7 @@
  * @Author: xiagf 
  * @Date: 2018-10-29 19:38:55 
  * @Last Modified by: xiagf
- * @Last Modified time: 2018-11-01 20:35:12
+ * @Last Modified time: 2018-11-02 18:47:30
  */
 <template>
     <div class="seller" ref="seller">
@@ -88,9 +88,9 @@ export default {
     },
     data() {
         return {
-            favorite: () => {
+            favorite: (() => {
                 return loadFromLocal(this.seller.id, "favorite", false);
-            }
+            })()
         };
     },
     components: {
