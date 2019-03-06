@@ -191,6 +191,7 @@ export default {
             this.drop(target);
         },
         beforeDrop(el) {
+            //小球内外两个动画
             let count = this.balls.length;
             while (count--) {
                 let ball = this.balls[count];
