@@ -1,3 +1,5 @@
+
+// 小球的top跟父布局的top一样
 <template>
     <div>
         <div class="shopcart">
@@ -217,6 +219,7 @@ export default {
                 let inner = el.getElementsByClassName("inner-hook")[0];
                 inner.style.webkitTransform = "translate3d(0,0,0)";
                 inner.style.transform = "translate3d(0,0,0)";
+                //监听transitioned事件（会在CSS transitioon结束后触发）
                 el.addEventListener("transitionend", done);
             });
         },
@@ -235,6 +238,7 @@ export default {
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
+
 @import '../../common/stylus/mixin.styl'
 
 .shopcart
@@ -244,6 +248,7 @@ export default {
     z-index: 50
     width: 100%
     height: 48px
+    background: #ff00ff
     .content
         display: flex
         background: #141d27
