@@ -1,3 +1,9 @@
+/*
+ * @Author: xiagf 
+ * @Date: 2019-03-12 21:50:38 
+ * @Last Modified by:   xiagf 
+ * @Last Modified time: 2019-03-12 21:50:38 
+ */
 
 <template>
     <div>
@@ -117,7 +123,20 @@ export default {
     },
 
     methods: {
+        foo() {
+            var i = 1;
+            return function() {
+                i++;
+                console.log(i);
+            };
+        },
         addFood(target) {
+            let a = this.foo();
+            let b = this.foo();
+            a();
+            a();
+            b();
+            console.log("测试点击了addFood方法啊");
             this._drop(target);
         },
         _drop(target) {
@@ -178,7 +197,6 @@ export default {
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-
 @import '../../common/stylus/mixin.styl'
 
 .goods
